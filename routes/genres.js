@@ -1,3 +1,4 @@
+const asyncMiddleware = require('../middleware/async');
 const admin = require('../middleware/admin');
 const auth = require('../middleware/auth');
 const mongoose = require('mongoose');
@@ -9,9 +10,10 @@ const {Genre, validate} = require('../models/genre')
 const Joi = require('joi');
 
 
-  router.get('/', async (req, res) => {
-    const genres = await Genre.find().sort('name');
-    res.send(genres);
+  router.get('/', async (req, res, next) => {
+    throw new Error('throw by us')
+      const genres = await Genre.find().sort('name');
+      res.send(genres);
   });
   
   router.post('/', auth, async (req, res) => {
