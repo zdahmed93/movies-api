@@ -1,12 +1,12 @@
 const winston = require('winston');
-require('winston-mongodb');
+// require('winston-mongodb');
 require('express-async-errors');
 
 module.exports = function () {
     winston.add(winston.transports.File, { filename: 'logfile.log' }); // Winston can log errors in multiple transports. A transport is where a log is stored
-    winston.add(winston.transports.MongoDB, {
-        db: 'mongodb://localhost/vidly' // we can another attribute to this object which is "level" that specifies what levels we want to store in the log collection (error / info / warn / ...) 
-    });
+    // winston.add(winston.transports.MongoDB, {
+    //     db: 'mongodb://localhost/vidly' // we can another attribute to this object which is "level" that specifies what levels we want to store in the log collection (error / info / warn / ...) 
+    // });
 
     // // HANDLE uncaughtException(for sync) & unhandledRejection(for async)
     // // for synchronous code

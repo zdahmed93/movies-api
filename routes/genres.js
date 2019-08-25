@@ -1,3 +1,4 @@
+const validateObjectId = require('../middleware/validateObjectId');
 const asyncMiddleware = require('../middleware/async');
 const admin = require('../middleware/admin');
 const auth = require('../middleware/auth');
@@ -11,7 +12,6 @@ const Joi = require('joi');
 
 
   router.get('/', async (req, res, next) => {
-    throw new Error('throw by us')
       const genres = await Genre.find().sort('name');
       res.send(genres);
   });
@@ -46,7 +46,8 @@ const Joi = require('joi');
     res.send(genre);
   });
   
-  router.get('/:id', async (req, res) => {
+  router.get('/:id',validateObjectId, async (req, res) => {
+
     const genre = await Genre.findById(req.params.id);
 
     if (!genre) return res.status(404).send('The genre with the given ID was not found.');
